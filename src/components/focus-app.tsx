@@ -20,7 +20,7 @@ export function FocusApp() {
   const [ready, setReady] = useState(false);
   const [now, setNow] = useState(Date.now());
   const [selectedTask, setSelectedTask] = useState("");
-  const [duration, setDuration] = useState(45);
+  const [duration, setDuration] = useState(60);
   const [customLength, setCustomLength] = useState(false);
   const [addType, setAddType] = useState<AddType | null>(null);
   const [draft, setDraft] = useState("");
