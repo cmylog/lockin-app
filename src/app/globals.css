@@ -182,6 +182,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 }
 
 @media (max-width: 600px) {
+  .intro.side-card { display: none; }
   .header-actions { gap: 9px; }
   .page-switch { min-height: 32px; padding: 0 9px !important; font-size: .7rem !important; }
   .header-date { font-size: .74rem; }
