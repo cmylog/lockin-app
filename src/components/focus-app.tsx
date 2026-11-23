@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { Check, Clock3, Focus, Pause, Play, Plus, Trash2 } from "lucide-react";
+import { Check, Focus, Pause, Play, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -198,7 +198,6 @@ export function FocusApp() {
           {data.habits.length === 0 ? <div className="empty-list">No habits yet. Start with something small.</div> : <div className="daily-list">{data.habits.map(habit => { const done = habit.completedDates.includes(today); const streak = habitStreak(habit.completedDates, today); return <div className="daily-item" key={habit.id}><button className={`item-check ${done ? "checked" : ""}`} aria-label={done ? `Uncheck ${habit.title}` : `Check ${habit.title}`} onClick={() => toggleHabit(habit.id)}>{done && <Check size={14} />}</button><div className="item-copy"><span>{habit.title}</span>{streak > 0 && <small>{streak} day streak</small>}</div><button className="delete-button" aria-label={`Delete ${habit.title}`} onClick={() => setData(previous => ({ ...previous, habits: previous.habits.filter(item => item.id !== habit.id) }))}><Trash2 size={15} /></button></div>; })}</div>}
         </section>
       </div>
-      <footer className="app-footer"><Clock3 size={14} /> Your progress is saved in this browser.</footer>
     </main>
 
     <Dialog open={addType !== null} onOpenChange={open => { if (!open) setAddType(null); }}><DialogContent className="add-dialog"><DialogHeader><DialogTitle>Add {addType}</DialogTitle><DialogDescription>{addType === "task" ? "Name the work you want to do." : "Choose something small to repeat every day."}</DialogDescription></DialogHeader><form className="add-form" onSubmit={addItem}><label htmlFor="item-title">{addType === "task" ? "Task name" : "Habit name"}</label><Input id="item-title" autoFocus maxLength={100} value={draft} onChange={event => setDraft(event.target.value)} placeholder={addType === "task" ? "e.g. Finish the proposal" : "e.g. Read for 20 minutes"} /><Button className="primary-button" type="submit" disabled={!draft.trim()}>Add {addType}</Button></form></DialogContent></Dialog>

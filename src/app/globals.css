@@ -85,18 +85,18 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 }
 .app-header, .focus-main { position: relative; z-index: 1; }
 .app-header { border-bottom: 1px solid #6a856b88; }
-.header-inner { max-width: 1040px; height: 72px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; justify-content: space-between; }
+.header-inner { max-width: 1460px; height: 72px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 9px; font-size: 1.08rem; font-weight: 800; letter-spacing: -.05em; }
 .brand svg { color: #bda5ff; }
 .header-date { color: #d4c7ae; font-size: .88rem; }
-.focus-main { max-width: 1040px; margin: 0 auto; padding: 65px 30px 70px; }
-.intro { margin-bottom: 30px; }
+.focus-main { max-width: 1460px; margin: 0 auto; padding: 65px 30px 70px; display: grid; grid-template-columns: minmax(180px, .72fr) minmax(380px, 1.55fr) minmax(220px, .9fr); column-gap: clamp(24px, 3.5vw, 54px); align-items: start; }
+.intro { min-width: 0; }
 .intro-label { color: #cab8fa; font-size: .72rem; font-weight: 700; letter-spacing: .14em; margin: 0 0 14px; }
 .intro h1 { font-size: clamp(2.8rem, 5vw, 4.3rem); line-height: 1; font-weight: 650; letter-spacing: -.075em; margin: 0 0 13px; }
 .intro h1 span { color: #a98bf7; }
 .intro > p:last-child { color: #d5c9b2; font-size: 1rem; margin: 0; }
 
-.session { max-width: 780px; background: transparent; border: 1px solid #5b765f; border-radius: 14px; padding: 25px 28px 23px; }
+.session { min-width: 0; width: 100%; background: transparent; border: 1px solid #5b765f; border-radius: 14px; padding: 25px 28px 23px; }
 .session-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #d3c6ad; font-size: .82rem; }
 .session-status { display: flex; align-items: center; gap: 9px; }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #a8987c; }
@@ -124,7 +124,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .length-picker button.selected { background: #8b5cf6; border-color: #8b5cf6; color: #fff9f0; }
 .length-picker button:disabled { opacity: .6; }
 
-.daily-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-top: 76px; }
+.daily-sections { min-width: 0; display: grid; grid-template-columns: 1fr; gap: 38px; }
 .daily-section { min-width: 0; border-top: 1px solid #7f987f; padding-top: 19px; }
 .section-heading { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
 .section-heading h2 { margin: 0; font-size: 1.22rem; font-weight: 620; letter-spacing: -.035em; }
@@ -142,7 +142,6 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .delete-button { border: 0; background: none; color: #b1a58d; padding: 6px; border-radius: 6px; }
 .delete-button:hover { color: #ffb5b5; background: #623b3b55; }
 .empty-list { margin-top: 25px; padding: 25px 0; color: #c6b9a0; font-size: .85rem; }
-.app-footer { display: flex; align-items: center; gap: 8px; margin-top: 66px; color: #b9ab92; font-size: .75rem; }
 
 .add-dialog { background: #244a35 !important; color: #e8dcc4 !important; border-color: #6b876d !important; }
 .add-dialog [data-slot="dialog-description"] { color: #c6b9a0; }
@@ -153,10 +152,14 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .add-form input::placeholder { color: #b9ab92; }
 .add-form .primary-button { margin-top: 8px; }
 
+@media (max-width: 980px) {
+  .focus-main { max-width: 780px; grid-template-columns: 1fr; row-gap: 48px; }
+  .daily-sections { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px; }
+}
+
 @media (max-width: 760px) {
   .header-inner { height: 63px; padding: 0 20px; }
   .focus-main { padding: 52px 20px 60px; }
-  .session { max-width: none; }
   .daily-sections { gap: 30px; }
 }
 
@@ -171,6 +174,6 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   .session-settings { grid-template-columns: 1fr; gap: 18px; }
   .length-picker > div { display: grid; grid-template-columns: repeat(4, 1fr); }
   .length-picker button { width: 100%; }
-  .daily-sections { grid-template-columns: 1fr; gap: 42px; margin-top: 60px; }
-  .app-footer { margin-top: 55px; }
+  .focus-main { row-gap: 42px; }
+  .daily-sections { grid-template-columns: 1fr; gap: 42px; }
 }
