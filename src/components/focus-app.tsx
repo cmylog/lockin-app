@@ -174,8 +174,8 @@ export function FocusApp() {
         <div className="session-heading"><span className="session-status"><span className={focus?.endAt ? "status-dot active" : "status-dot"} />{focus ? focus.endAt ? "In progress" : "Paused" : "Ready when you are"}</span><span className="session-length">{focus?.durationMinutes ?? duration} min session</span></div>
         <div className="time-display"><div className="time-caption">TIME REMAINING</div><div className="time-number" role="timer" aria-label={`${formatTime(remaining)} remaining`}>{formatTime(remaining)}</div><div className="time-task">{focus ? data.tasks.find(task => task.id === focus.taskId)?.title ?? "Just focusing" : "One thing at a time"}</div></div>
         <div className="time-progress" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} aria-label="Session progress"><span style={{ width: `${progress}%` }} /></div>
-        <div className="session-controls">
-          {!focus ? <Button className="primary-button" onClick={startFocus}><Play size={16} fill="currentColor" /> Start focus</Button> : <>
+        <div className={`session-controls ${focus ? "" : "is-ready"}`}>
+          {!focus ? <Button className="primary-button start-button" onClick={startFocus}><Play size={16} fill="currentColor" /> Start focus</Button> : <>
             <Button className="primary-button" onClick={focus.endAt ? pauseFocus : resumeFocus}>{focus.endAt ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" />}{focus.endAt ? "Pause" : "Resume"}</Button>
             <Button variant="outline" className="quiet-button" onClick={finishFocus}><Check size={16} /> Finish</Button>
             <button className="text-button" onClick={() => setData(previous => ({ ...previous, focus: null }))}>Discard</button>
