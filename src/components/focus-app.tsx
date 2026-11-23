@@ -179,7 +179,7 @@ export function FocusApp() {
     <header className="app-header">
       <div className="header-inner">
         <div className="brand"><Focus size={21} strokeWidth={2.3} /><span>LOCK IN<span className="brand-dot">.</span></span></div>
-        <div className="header-actions"><div className="header-date">{new Date(now).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</div><Button variant="outline" className="add-button page-switch" onClick={() => setPage(page === "focus" ? "progress" : "focus")}>{page === "focus" ? <><ChartNoAxesColumnIncreasing size={16} /> Progress</> : <><Focus size={16} /> Focus</>}</Button></div>
+        <div className="header-actions"><Button variant="outline" className="add-button page-switch" onClick={() => setPage(page === "focus" ? "progress" : "focus")}>{page === "focus" ? <><ChartNoAxesColumnIncreasing size={16} /> Progress</> : <><Focus size={16} /> Focus</>}</Button></div>
       </div>
     </header>
 
