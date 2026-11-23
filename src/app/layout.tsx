@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "./palette.css";
 
 export const metadata: Metadata = {
   title: "Lock In — Make today count",
