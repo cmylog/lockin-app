@@ -1,5 +1,5 @@
-import { Dashboard } from "@/components/dashboard";
+import { FocusApp } from "@/components/focus-app";
 
 export default function Home() {
-  return <Dashboard />;
+  return <FocusApp />;
 }

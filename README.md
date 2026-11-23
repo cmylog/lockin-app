@@ -1,6 +1,6 @@
 # Lock In
 
-A personal dashboard for goals, daily tasks, habits, and focus sessions. Built with Next.js App Router, TypeScript, Tailwind CSS, and shadcn/ui-style source components.
+A focus-first app with a timer, daily tasks, and habits. Built with Next.js App Router, TypeScript, Tailwind CSS, and shadcn/ui-style source components.
 
 ## Run locally
 
