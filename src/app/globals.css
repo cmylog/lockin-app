@@ -78,10 +78,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   height: min(64vh, 650px);
   min-height: 420px;
   pointer-events: none;
-  background:
-    radial-gradient(ellipse 78% 72% at 18% 105%, #e8dcc455, transparent 78%),
-    radial-gradient(ellipse 65% 70% at 90% 112%, #c9c4a344, transparent 76%),
-    linear-gradient(to bottom, transparent, #294d36 85%);
+  background: linear-gradient(to bottom, transparent, #1f3d2b 85%);
 }
 .app-header, .focus-main { position: relative; z-index: 1; }
 .app-header { border-bottom: 1px solid #6a856b88; }
