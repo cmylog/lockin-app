@@ -9,7 +9,7 @@ import { type AppData, type FocusState, emptyData, formatTime, habitStreak, loca
 
 type AddType = "task" | "habit";
 
-const lengths = [15, 25, 45, 60];
+const lengths = [45, 60];
 
 function newId() {
   return crypto.randomUUID();
@@ -20,7 +20,8 @@ export function FocusApp() {
   const [ready, setReady] = useState(false);
   const [now, setNow] = useState(Date.now());
   const [selectedTask, setSelectedTask] = useState("");
-  const [duration, setDuration] = useState(25);
+  const [duration, setDuration] = useState(45);
+  const [customLength, setCustomLength] = useState(false);
   const [addType, setAddType] = useState<AddType | null>(null);
   const [draft, setDraft] = useState("");
   const [page, setPage] = useState<"focus" | "progress">("focus");
@@ -198,7 +199,7 @@ export function FocusApp() {
         </div>
         <div className="session-settings">
           <label className="task-picker">Working on<select value={focus?.taskId ?? selectedTask} disabled={!!focus} onChange={event => setSelectedTask(event.target.value)}><option value="">Just focusing</option>{activeTasks.map(task => <option key={task.id} value={task.id}>{task.title}</option>)}</select></label>
-          <div className="length-picker"><span>Session length</span><div>{lengths.map(value => <button key={value} className={duration === value ? "selected" : ""} disabled={!!focus} onClick={() => setDuration(value)}>{value}m</button>)}</div></div>
+          <div className="length-picker"><span>Session length</span><div>{lengths.map(value => <button key={value} className={!customLength && duration === value ? "selected" : ""} disabled={!!focus} onClick={() => { setDuration(value); setCustomLength(false); }}>{value}m</button>)}<button className={customLength ? "selected" : ""} disabled={!!focus} onClick={() => { setCustomLength(true); setDuration(value => value === 45 || value === 60 ? 90 : value); }}>Custom</button></div>{customLength && <label className="custom-length"><input aria-label="Custom session length in minutes" type="number" min="1" max="240" step="1" value={duration} disabled={!!focus} onChange={event => setDuration(Math.max(1, Math.min(240, Number(event.target.value) || 1)))} /> min</label>}</div>
         </div>
       </section>
 

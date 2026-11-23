@@ -126,6 +126,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .length-picker button { min-width: 49px; height: 39px; padding: 0 8px; border: 1px solid #718a73; border-radius: 7px; background: #2c543c; color: #e8dcc4; font-size: .78rem; font-weight: 600; }
 .length-picker button.selected { background: #8b5cf6; border-color: #8b5cf6; color: #fff9f0; }
 .length-picker button:disabled { opacity: .6; }
+.custom-length { display: flex; align-items: center; gap: 7px; margin-top: 9px; color: #d4c7ae; font-size: .78rem; }
+.custom-length input { width: 74px; height: 36px; padding: 0 9px; border: 1px solid #718a73; border-radius: 7px; background: #2c543c; color: #f0e7d5; }
 
 .daily-sections { min-width: 0; display: grid; grid-template-columns: 1fr; gap: 38px; }
 .daily-section { min-width: 0; padding: 22px; border: 1px solid #5b765f; border-radius: 14px; }
@@ -193,7 +195,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   .time-display { padding: 42px 0 30px; }
   .time-number { font-size: clamp(4.4rem, 16vw, 6.6rem); }
   .session-settings { grid-template-columns: 1fr; gap: 18px; }
-  .length-picker > div { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .length-picker > div { display: grid; grid-template-columns: repeat(3, 1fr); }
   .length-picker button { width: 100%; }
   .focus-main { row-gap: 42px; }
   .daily-sections { grid-template-columns: 1fr; gap: 42px; }
