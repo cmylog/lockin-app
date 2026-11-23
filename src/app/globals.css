@@ -90,14 +90,13 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .brand svg { color: #bda5ff; }
 .header-date { color: #d4c7ae; font-size: .88rem; }
 .focus-main { max-width: 1040px; margin: 0 auto; padding: 65px 30px 70px; }
-.focus-main > * { position: relative; z-index: 1; }
 .intro { margin-bottom: 30px; }
 .intro-label { color: #cab8fa; font-size: .72rem; font-weight: 700; letter-spacing: .14em; margin: 0 0 14px; }
 .intro h1 { font-size: clamp(2.8rem, 5vw, 4.3rem); line-height: 1; font-weight: 650; letter-spacing: -.075em; margin: 0 0 13px; }
 .intro h1 span { color: #a98bf7; }
 .intro > p:last-child { color: #d5c9b2; font-size: 1rem; margin: 0; }
 
-.session { max-width: 780px; background: linear-gradient(180deg, #244a35ee 0%, #244a35de 58%, #244a3566 100%); border: 1px solid #9b87bd88; border-radius: 14px; padding: 25px 28px 23px; box-shadow: 0 16px 45px #10271925; }
+.session { max-width: 780px; background: transparent; border: 1px solid #5b765f; border-radius: 14px; padding: 25px 28px 23px; }
 .session-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #d3c6ad; font-size: .82rem; }
 .session-status { display: flex; align-items: center; gap: 9px; }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #a8987c; }
@@ -109,25 +108,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .time-task { color: #d4c7ae; font-size: .9rem; min-height: 1.3em; }
 .time-progress { height: 3px; overflow: hidden; background: #5d7960; border-radius: 99px; }
 .time-progress span { display: block; height: 100%; background: #a985fa; transition: width .3s linear; }
-.session-controls { position: relative; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; min-height: 88px; }
-.session-controls::before {
-  content: "";
-  position: absolute;
-  top: 68px;
-  left: 50%;
-  width: min(1400px, 170vw);
-  height: 760px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse 52% 43% at 50% 29%, #8b5cf6e0 0%, #8b5cf6a6 36%, #8b5cf64d 72%, transparent 100%),
-    radial-gradient(ellipse 68% 54% at 50% 35%, #8b5cf658 0%, transparent 100%);
-  filter: blur(42px);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 75%, transparent 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-.session-controls > *, .session-settings { position: relative; z-index: 1; }
+.session-controls { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px; min-height: 88px; }
 .primary-button { min-height: 41px; border-radius: 8px !important; background: #8b5cf6 !important; color: #fff9f0 !important; font-weight: 650 !important; }
 .primary-button:hover { background: #7649dd !important; }
 .quiet-button { min-height: 41px; border-color: #8b9e8b !important; color: #e8dcc4 !important; background: transparent !important; }
