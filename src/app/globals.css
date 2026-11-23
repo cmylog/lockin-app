@@ -81,7 +81,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   background: linear-gradient(to bottom, transparent, #1f3d2b 85%);
 }
 .app-header, .focus-main { position: relative; z-index: 1; }
-.app-header { border-bottom: 1px solid #6a856b88; }
+.app-header { border-bottom: 0; }
 .header-inner { max-width: 1460px; height: 72px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 9px; font-size: 1.08rem; font-weight: 800; letter-spacing: -.05em; }
 .brand svg { color: #bda5ff; }
