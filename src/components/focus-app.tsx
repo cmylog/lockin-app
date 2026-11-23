@@ -183,7 +183,7 @@ export function FocusApp() {
     </header>
 
     {page === "focus" ? <main className="focus-main">
-      <div className="intro"><p className="intro-label">YOUR SPACE TO FOCUS</p><h1>Lock in<span>.</span></h1><p>Choose a task, start the timer, and do the work.</p></div>
+      <div className="intro side-card"><p className="intro-label">YOUR SPACE TO FOCUS</p><h1>Lock in<span>.</span></h1><p>Choose a task, start the timer, and do the work.</p></div>
 
       <section className="session" aria-label="Focus session">
         <div className="session-heading"><span className="session-status"><span className={focus?.endAt ? "status-dot active" : "status-dot"} />{focus ? focus.endAt ? "In progress" : "Paused" : "Ready when you are"}</span><span className="session-length">{focus?.durationMinutes ?? duration} min session</span></div>
