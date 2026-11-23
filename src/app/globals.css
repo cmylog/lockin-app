@@ -97,7 +97,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
 .intro h1 span { color: #a98bf7; }
 .intro > p:last-child { color: #d5c9b2; font-size: 1rem; margin: 0; }
 
-.session { max-width: 780px; background: linear-gradient(180deg, #244a35cc, #244a35a8); border: 1px solid #9b87bd88; border-radius: 14px; padding: 25px 28px 23px; box-shadow: 0 16px 45px #10271925; }
+.session { max-width: 780px; background: linear-gradient(180deg, #244a35ee 0%, #244a35de 58%, #244a3566 100%); border: 1px solid #9b87bd88; border-radius: 14px; padding: 25px 28px 23px; box-shadow: 0 16px 45px #10271925; }
 .session-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: #d3c6ad; font-size: .82rem; }
 .session-status { display: flex; align-items: center; gap: 9px; }
 .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #a8987c; }
@@ -119,12 +119,15 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px s
   height: 760px;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 16%, #8b5cf6b8 0%, #8b5cf68c 25%, #8b5cf64d 52%, transparent 78%);
-  filter: blur(40px);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 78%, transparent 100%);
+  background:
+    radial-gradient(ellipse 52% 43% at 50% 29%, #8b5cf6e0 0%, #8b5cf6a6 36%, #8b5cf64d 72%, transparent 100%),
+    radial-gradient(ellipse 68% 54% at 50% 35%, #8b5cf658 0%, transparent 100%);
+  filter: blur(42px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 12%, #000 75%, transparent 100%);
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
 }
+.session-controls > *, .session-settings { position: relative; z-index: 1; }
 .primary-button { min-height: 41px; border-radius: 8px !important; background: #8b5cf6 !important; color: #fff9f0 !important; font-weight: 650 !important; }
 .primary-button:hover { background: #7649dd !important; }
 .quiet-button { min-height: 41px; border-color: #8b9e8b !important; color: #e8dcc4 !important; background: transparent !important; }
