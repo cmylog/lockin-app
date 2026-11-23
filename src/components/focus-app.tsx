@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { Check, Focus, Pause, Play, Plus, Trash2 } from "lucide-react";
+import { Check, Focus, Pause, Play, Plus, Trash2, ChartNoAxesColumnIncreasing } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -23,6 +23,7 @@ export function FocusApp() {
   const [duration, setDuration] = useState(25);
   const [addType, setAddType] = useState<AddType | null>(null);
   const [draft, setDraft] = useState("");
+  const [page, setPage] = useState<"focus" | "progress">("focus");
 
   useEffect(() => {
     setData(readData());
@@ -47,6 +48,20 @@ export function FocusApp() {
   const activeTasks = data.tasks.filter(task => !task.completedAt);
   const completedToday = data.tasks.filter(task => task.completedAt && localDate(new Date(task.completedAt)) === today);
   const visibleTasks = [...activeTasks, ...completedToday];
+  const weekDays = Array.from({ length: 7 }, (_, index) => {
+    const date = new Date(now);
+    date.setHours(12, 0, 0, 0);
+    date.setDate(date.getDate() - ((date.getDay() + 6) % 7) + index);
+    const key = localDate(date);
+    const minutes = data.sessions.filter(session => localDate(new Date(session.finishedAt)) === key).reduce((sum, session) => sum + session.durationSeconds, 0) / 60;
+    return { key, label: date.toLocaleDateString(undefined, { weekday: "short" }), minutes };
+  });
+  const monthStart = new Date(new Date(now).getFullYear(), new Date(now).getMonth(), 1);
+  const monthSessions = data.sessions.filter(session => new Date(session.finishedAt) >= monthStart);
+  const weekMinutes = weekDays.reduce((sum, day) => sum + day.minutes, 0);
+  const monthMinutes = monthSessions.reduce((sum, session) => sum + session.durationSeconds, 0) / 60;
+  const monthTasks = data.tasks.filter(task => task.completedAt && new Date(task.completedAt) >= monthStart).length;
+  const monthHabitChecks = data.habits.reduce((sum, habit) => sum + habit.completedDates.filter(date => date >= localDate(monthStart)).length, 0);
 
   useEffect(() => {
     if (!ready || !focus?.endAt || focus.endAt > now) return;
@@ -163,11 +178,11 @@ export function FocusApp() {
     <header className="app-header">
       <div className="header-inner">
         <div className="brand"><Focus size={21} strokeWidth={2.3} /><span>LOCK IN<span className="brand-dot">.</span></span></div>
-        <div className="header-date">{new Date(now).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</div>
+        <div className="header-actions"><div className="header-date">{new Date(now).toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</div><Button variant="outline" className="add-button page-switch" onClick={() => setPage(page === "focus" ? "progress" : "focus")}>{page === "focus" ? <><ChartNoAxesColumnIncreasing size={16} /> Progress</> : <><Focus size={16} /> Focus</>}</Button></div>
       </div>
     </header>
 
-    <main className="focus-main">
+    {page === "focus" ? <main className="focus-main">
       <div className="intro"><p className="intro-label">YOUR SPACE TO FOCUS</p><h1>Lock in<span>.</span></h1><p>Choose a task, start the timer, and do the work.</p></div>
 
       <section className="session" aria-label="Focus session">
@@ -198,7 +213,15 @@ export function FocusApp() {
           {data.habits.length === 0 ? <div className="empty-list">No habits yet. Start with something small.</div> : <div className="daily-list">{data.habits.map(habit => { const done = habit.completedDates.includes(today); const streak = habitStreak(habit.completedDates, today); return <div className="daily-item" key={habit.id}><button className={`item-check ${done ? "checked" : ""}`} aria-label={done ? `Uncheck ${habit.title}` : `Check ${habit.title}`} onClick={() => toggleHabit(habit.id)}>{done && <Check size={14} />}</button><div className="item-copy"><span>{habit.title}</span>{streak > 0 && <small>{streak} day streak</small>}</div><button className="delete-button" aria-label={`Delete ${habit.title}`} onClick={() => setData(previous => ({ ...previous, habits: previous.habits.filter(item => item.id !== habit.id) }))}><Trash2 size={15} /></button></div>; })}</div>}
         </section>
       </div>
-    </main>
+    </main> : <main className="progress-main">
+      <div className="progress-intro"><p className="intro-label">YOUR CONSISTENCY, AT A GLANCE</p><h1>Your progress<span>.</span></h1><p>Every focused session and small daily win adds up.</p></div>
+      <div className="progress-summary">
+        <section className="progress-card"><span>This week</span><strong>{Math.round(weekMinutes)}<small> min focused</small></strong><div className="week-chart" aria-label="Focus minutes by day">{weekDays.map(day => <div className="week-bar" key={day.key}><div className="week-bar-track"><span style={{ height: `${Math.max(day.minutes ? 8 : 0, Math.min(100, day.minutes / Math.max(60, ...weekDays.map(d => d.minutes)) * 100))}%` }} /></div><small>{day.label}</small></div>)}</div></section>
+        <section className="progress-card"><span>{new Date(now).toLocaleDateString(undefined, { month: "long" })}</span><strong>{Math.round(monthMinutes)}<small> min focused</small></strong><p>{monthSessions.length} focus {monthSessions.length === 1 ? "session" : "sessions"} this month</p></section>
+        <section className="progress-card"><span>Tasks completed</span><strong>{monthTasks}<small> this month</small></strong><p>Keep your momentum going.</p></section>
+        <section className="progress-card"><span>Habit check-ins</span><strong>{monthHabitChecks}<small> this month</small></strong><p>Small steps, repeated daily.</p></section>
+      </div>
+    </main>}
 
     <Dialog open={addType !== null} onOpenChange={open => { if (!open) setAddType(null); }}><DialogContent className="add-dialog"><DialogHeader><DialogTitle>Add {addType}</DialogTitle><DialogDescription>{addType === "task" ? "Name the work you want to do." : "Choose something small to repeat every day."}</DialogDescription></DialogHeader><form className="add-form" onSubmit={addItem}><label htmlFor="item-title">{addType === "task" ? "Task name" : "Habit name"}</label><Input id="item-title" autoFocus maxLength={100} value={draft} onChange={event => setDraft(event.target.value)} placeholder={addType === "task" ? "e.g. Finish the proposal" : "e.g. Read for 20 minutes"} /><Button className="primary-button" type="submit" disabled={!draft.trim()}>Add {addType}</Button></form></DialogContent></Dialog>
   </div>;
